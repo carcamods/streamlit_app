@@ -3,18 +3,25 @@ import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
 
-# Load model and scaler
+# Load model and scaler with proper error handling
+model = None
+scaler = None
+df = None
 try:
     model = pickle.load(open('random_forest_model.pkl', 'rb'))
     scaler = pickle.load(open('scaler.pkl', 'rb'))  
-    # Load the dataframe that contains the validation data points
     df = pd.read_csv('processed_validation_df.csv')
 except Exception as e:
-    st.write(f"Error loading model: {e}")
+    st.error(f"Error loading model, scaler, or validation data: {e}")
+    st.stop()  # Stop further execution if loading fails
 
-#load the df that contains the raw values per summoner_id
-raw_df = pd.read_csv('validation_df.csv')
-raw_df['game_creation_dt'] = pd.to_datetime(raw_df['game_creation_dt'])  
+# Load the df that contains the raw values per summoner_id
+try:
+    raw_df = pd.read_csv('validation_df.csv')
+    raw_df['game_creation_dt'] = pd.to_datetime(raw_df['game_creation_dt'])  # Convert to datetime if not already
+except Exception as e:
+    st.error(f"Error loading raw data: {e}")
+    st.stop()  # Stop further execution if raw data loading fails
 
 
 # Streamlit webpage title
