@@ -4,7 +4,11 @@ import pickle
 import matplotlib.pyplot as plt
 
 # Load model and scaler
-model = pickle.load(open('random_forest_model.pkl', 'rb'))
+try:
+    model = pickle.load(open('random_forest_model.pkl', 'rb'))
+except Exception as e:
+    st.write(f"Error loading model: {e}")
+
 scaler = pickle.load(open('scaler.pkl', 'rb'))  # Ensure you've saved your scaler the same way as your model
 
 # Load the dataframe that contains the validation data points
