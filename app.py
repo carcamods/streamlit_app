@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import pickle
-from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 
 # Load model and scaler
