@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
 
 # Load model and scaler with proper error handling
 model = None
