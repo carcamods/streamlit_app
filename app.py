@@ -6,17 +6,15 @@ import matplotlib.pyplot as plt
 # Load model and scaler
 try:
     model = pickle.load(open('random_forest_model.pkl', 'rb'))
+    scaler = pickle.load(open('scaler.pkl', 'rb'))  
+    # Load the dataframe that contains the validation data points
+    df = pd.read_csv('processed_validation_df.csv')
 except Exception as e:
     st.write(f"Error loading model: {e}")
 
-scaler = pickle.load(open('scaler.pkl', 'rb'))  # Ensure you've saved your scaler the same way as your model
-
-# Load the dataframe that contains the validation data points
-df = pd.read_csv('processed_validation_df.csv')
-
 #load the df that contains the raw values per summoner_id
 raw_df = pd.read_csv('validation_df.csv')
-raw_df['game_creation_dt'] = pd.to_datetime(raw_df['game_creation_dt'])  # Convert to datetime if not already
+raw_df['game_creation_dt'] = pd.to_datetime(raw_df['game_creation_dt'])  
 
 
 # Streamlit webpage title
